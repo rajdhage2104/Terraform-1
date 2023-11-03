@@ -92,7 +92,7 @@ resource "aws_instance" "TF_instance" {
   ami = "ami-0763cf792771fe1bd"
   instance_type = "t2.micro"
   key_name = "mykey100"
-  vpc_security_group_ids = aws_vpc.my_vpc.id
+  #vpc_security_group_ids = aws_vpc.my_vpc.id
   subnet_id = aws_subnet.my_subnet.id
   security_groups = [ aws_security_group.my-sg.name ]
   tags = {
