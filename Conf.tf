@@ -1,6 +1,7 @@
 provider "aws" {
   region = "ap-south-1"
 }
+
 #VPC
 resource "aws_vpc" "my_vpc" {
   cidr_block = "10.0.0.0/20"
@@ -8,13 +9,15 @@ resource "aws_vpc" "my_vpc" {
     name = My_vpc
   }
 }
-#Subnet 
+
+#Subnet
 resource "aws_subnet" "my_subnet" {
   vpc_id = aws_vpc.my_vpc.id
   cidr_block = "10.0.0.0/24"
   availability_zone = "ap-south-1a"
   map_public_ip_on_launch = true
 }
+
 #Security Group
 resource "aws_security_group" "my-sg" {
   name = "sg1"
@@ -45,25 +48,30 @@ resource "aws_security_group" "my-sg" {
   }
   ]
 }
+
 # Internet Gateway
 resource "aws_internet_gateway" "my-igw" {
   vpc_id = aws_vpc.my_vpc.id
 }
+
 # Route Table
 resource "aws_route_table" "my_route" {
     vpc_id = aws_vpc.my_vpc.id
 }
+
 # Route to IGW
 resource "aws_route" "route_to_IGW" {
   route_table_id = aws_route_table.my_route.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id = aws_internet_gateway.my-igw.id
 }
+
 #Route to subnet
 resource "aws_route_table_association" "subnet_association" {
   subnet_id = aws_subnet.my_subnet.id
   route_table_id = aws_route_table.my_route.id
 }
+
 #EC2 Instance
 resource "aws_instance" "TF_instance" {
   ami = "ami-0763cf792771fe1bd"
