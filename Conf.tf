@@ -94,7 +94,7 @@ resource "aws_instance" "TF_instance" {
   key_name = "mykey100"
   #vpc_security_group_ids = aws_vpc.my_vpc.id
   subnet_id = aws_subnet.my_subnet.id
-  security_groups = [ aws_security_group.my-sg.name ]
+  security_groups = [ aws_security_group.my-sg.id ]
   tags = {
     name = "new_instance"
     env = "dev"
