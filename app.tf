@@ -77,16 +77,13 @@ resource "aws_route" "route_to_IGW" {
 
 #route to Subnets
 resource "aws_route_table_association" "subnet_association" {
-[
-    {
-    subnet_id = aws_subnet.Stu_subnet1.id
+  subnet_id = aws_subnet.Stu_subnet1.id
   route_table_id = aws_route_table.RT_app.id
-    },
-    {
-      subnet_id = aws_subnet.Stu_subnet2.id
-  route_table_id = aws_route_table.RT_app.id  
-    }
-  ]
+  
+}
+resource "aws_route_table_association" "subnet_association" {
+  subnet_id = aws_subnet.Stu_subnet2.id
+  route_table_id = aws_route_table.RT_app.id
 }
 
 #Launch an EC2 Instance
