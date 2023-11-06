@@ -1,4 +1,4 @@
-provider "aws" {
+/*provider "aws" {
   region = "ap-south-1"
 }
 
@@ -99,4 +99,4 @@ resource "aws_instance" "TF_instance" {
     name = "new_instance"
     env = "dev"
   }
-}
+}*/
