@@ -5,7 +5,9 @@ provider "aws" {
 #Creating VPC
 resource "aws_vpc" "App_VPC" {
   cidr_block = "10.0.0.0/20"
-  tags = "student_app"
+  tags = {
+    name = "student_app"
+  }
 }
 
 #Creating Subnets
