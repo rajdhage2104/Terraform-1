@@ -18,12 +18,12 @@ resource "aws_subnet" "Stu_subnet1" {
   map_public_ip_on_launch = true
 }
 
-resource "aws_subnet" "Stu_subnet2" {
+/* resource "aws_subnet" "Stu_subnet2" {
   vpc_id = aws_vpc.App_VPC.id
   cidr_block = "10.0.1.0/24"
   availability_zone = "ap-south-1a"
   map_public_ip_on_launch = true
-}
+}*/
 
 #Securtiy Group
 resource "aws_security_group" "MySG" {
@@ -83,16 +83,17 @@ resource "aws_route_table_association" "subnet_association" {
   route_table_id = aws_route_table.RT_app.id
   
 }
-resource "aws_route_table_association" "subnet_association2" {
+/*resource "aws_route_table_association" "subnet_association2" {
   subnet_id = aws_subnet.Stu_subnet2.id
   route_table_id = aws_route_table.RT_app.id
-}
+}*/
 
 #Launch an EC2 Instance
 resource "aws_instance" "my_instance" {
   for_each = {for i, instance in var.instances : i => instance}
   ami = each.value.ami_id 
   instance_type = each.value.instance_type
+  subnet_id = aws_subnet.Stu_subnet1.id
   security_groups = [aws_security_group.MySG.id]
   key_name = each.value.key_name
 
