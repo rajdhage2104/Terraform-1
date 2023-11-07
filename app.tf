@@ -93,7 +93,7 @@ resource "aws_instance" "my_instance" {
   for_each = {for i, instance in var.instances : i => instance}
   ami = each.value.ami_id 
   instance_type = each.value.instance_type
-  security_groups = aws_security_group.MySG.id
+  security_groups = [aws_security_group.MySG.id]
   key_name = each.value.key_name
 
   tags = {
